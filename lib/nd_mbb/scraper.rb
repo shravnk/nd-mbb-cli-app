@@ -1,0 +1,3 @@
+class NdMbb::Scraper
+
+end
