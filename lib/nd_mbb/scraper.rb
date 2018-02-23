@@ -12,12 +12,15 @@ class NdMbb::Scraper
     player_array = []
     get_page.css("table#sortable_roster tr a").each do |player|
       p_name = player.text
-      NdMbb::Player.new({name: p_name})
+      p_link = player['href']
+      NdMbb::Player.new({name: p_name, link: p_link})
     end
   end
 
 end
 
+
 NdMbb::Scraper.make_players
+NdMbb::Player.all.each {|p| p.add_attributes}
 t = NdMbb::Player.all
 binding.pry

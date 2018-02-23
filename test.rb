@@ -2,9 +2,10 @@ require 'pry'
 require 'nokogiri'
 require 'open-uri'
 
-page = Nokogiri::HTML(open("http://www.und.com/sports/m-baskbl/mtt/nd-m-baskbl-mtt.html"))
+b = '/sports/m-baskbl/mtt/dj_harvey_1047144.html'
+page = Nokogiri::HTML(open("http://www.und.com" + b))
 
 
-t = page.css("table#sortable_roster tr a")[0].text
+t = page.css("div#biotable-info font")[4].text.split(":")[1]
 
 binding.pry
