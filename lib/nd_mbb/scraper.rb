@@ -1,18 +1,23 @@
+require_relative '../../config/environment'
+require_relative '../nd_mbb'
+require_relative '../nd_mbb/player'
+
 class NdMbb::Scraper
 
-  def get_page
+  def self.get_page
     Nokogiri::HTML(open("http://www.und.com/sports/m-baskbl/mtt/nd-m-baskbl-mtt.html"))
   end
 
-  def make_players
+  def self.make_players
     player_array = []
-    self.get_page.css("table#sortable_roster tr a").each do |player|
+    get_page.css("table#sortable_roster tr a").each do |player|
       p_name = player.text
-      binding.pry
-      player_array << {name: p_name}
+      NdMbb::Player.new({name: p_name})
     end
   end
 
 end
 
-make_players
+NdMbb::Scraper.make_players
+t = NdMbb::Player.all
+binding.pry

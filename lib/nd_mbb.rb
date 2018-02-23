@@ -1,4 +1,4 @@
-require "nd_mbb/version"
+require_relative '../config/environment'
 
 module NdMbb
   # Your code goes here...
