@@ -9,11 +9,13 @@ class NdMbb::Player
   @@all = []
 
   attr_accessor :name, :link, :class, :hometown, :high_school, :height, :weight, :position, :checkname
+  attr_accessor :seasons
 
   def initialize(player_hash)
     @name = player_hash[:name]
     @link = player_hash[:link]
     @@all << self
+    @seasons = []
   end
 
   def self.all
@@ -40,13 +42,28 @@ class NdMbb::Player
     set_check
   end
 
-  def pull_stats(n)
+  def pull_stats
       page = Nokogiri::XML(open('http://www.und.com/sports/m-baskbl/stats/2017-2018/indiv.xml'))
 
+      n = self.checkname
       page.xpath("//player[@checkname='#{n}']/season").each do |season|
-        puts season.attribute('year').value
+        seasons[i] = Hash.new
+                  
+        seasons[i][:year] = season.attribute('year').value
+        seasons[i][:games_played] = season.attribute('gp').value
+        seasons[i][:minutes] = season.attribute('min').value
+        seasons[i][:points] = season.attribute('tp').value
+        seasons[i][:avgpoints] = season.attribute('ptsavg').value
+        seasons[i][:fieldgoalpct] = season.attribute('fgpct').value
+        seasons[i][:fieldgoalpct3p] = season.attribute('fg3pct').value
+        seasons[i][:assists] = season.attribute('ast').value
+        seasons[i][:turnovers] = season.attribute('to').value
+        seasons[i][:blocks] = season.attribute('blk').value
+        seasons[i][:steals] = season.attribute('stl').value
+        binding.pry
+        i += 1
       end
-      
+
   end
 
 end
