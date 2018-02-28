@@ -40,8 +40,13 @@ class NdMbb::Player
     set_check
   end
 
-  def pull_stats
-    
+  def pull_stats(n)
+      page = Nokogiri::XML(open('http://www.und.com/sports/m-baskbl/stats/2017-2018/indiv.xml'))
+
+      page.xpath("//player[@checkname='#{n}']/season").each do |season|
+        puts season.attribute('year').value
+      end
+      
   end
 
 end
