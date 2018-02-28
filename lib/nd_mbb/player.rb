@@ -8,7 +8,7 @@ require 'open-uri'
 class NdMbb::Player
   @@all = []
 
-  attr_accessor :name, :link, :class, :hometown, :high_school, :height, :weight, :position
+  attr_accessor :name, :link, :class, :hometown, :high_school, :height, :weight, :position, :checkname
 
   def initialize(player_hash)
     @name = player_hash[:name]
@@ -20,6 +20,15 @@ class NdMbb::Player
     @@all
   end
 
+  def set_check
+    profile = Nokogiri::HTML(open('http://www.und.com' + self.link))
+    if profile.search('script').text.match(/thepliq = "(.+)"/)
+      self.checkname = profile.search('script').text.match(/thepliq = "(.+)"/)[1]
+    else
+      self.checkname = nil
+    end
+  end
+
   def add_attributes
     profile = Nokogiri::HTML(open('http://www.und.com' + self.link))
     self.class = profile.css("div#biotable-info font")[0].text.split(":")[1]
@@ -28,5 +37,11 @@ class NdMbb::Player
     self.height = profile.css("div#biotable-info font")[3].text.split(":")[1].split("/")[0]
     self.weight = profile.css("div#biotable-info font")[3].text.split(":")[1].split("/")[1]
     self.position = profile.css("div#biotable-info font")[4].text.split(":")[1]
+    set_check
   end
+
+  def pull_stats
+    
+  end
+
 end
