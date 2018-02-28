@@ -44,7 +44,7 @@ class NdMbb::Player
 
   def pull_stats
       page = Nokogiri::XML(open('http://www.und.com/sports/m-baskbl/stats/2017-2018/indiv.xml'))
-
+      i = 0
       n = self.checkname
       page.xpath("//player[@checkname='#{n}']/season").each do |season|
         seasons[i] = Hash.new
@@ -60,7 +60,7 @@ class NdMbb::Player
         seasons[i][:turnovers] = season.attribute('to').value
         seasons[i][:blocks] = season.attribute('blk').value
         seasons[i][:steals] = season.attribute('stl').value
-        binding.pry
+        
         i += 1
       end
 

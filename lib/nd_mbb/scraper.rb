@@ -21,7 +21,8 @@ end
 
 
 NdMbb::Scraper.make_players
-NdMbb::Scraper.pull_stats
+
 NdMbb::Player.all.each {|p| p.add_attributes}
+NdMbb::Player.all.each {|p| p.pull_stats}
 t = NdMbb::Player.all
-# binding.pry
+binding.pry
