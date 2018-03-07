@@ -40,12 +40,7 @@ class NdMbb::Player
     self.weight = profile.css("div#biotable-info font")[3].text.split(":")[1].split("/")[1].strip
     self.position = profile.css("div#biotable-info font")[4].text.split(":")[1]
     set_check
-    fix_height
-  end
-
-  def fix_height
-    self.height.gsub('\u00BD',' 1/2')
-  end
+   end
 
   def pull_stats
       page = Nokogiri::XML(open('http://www.und.com/sports/m-baskbl/stats/2017-2018/indiv.xml'))

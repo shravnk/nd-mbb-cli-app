@@ -20,9 +20,16 @@ class NdMbb::CLI
 		s_ind = gets.strip.to_i - 1
 
 		puts "\n#{cur_player.seasons[s_ind][:year]}\n\n" +
-		"Games Played: #{cur_player.seasons[s_ind][:games_played]}" +
-		"Minutes: #{cur_player.seasons[s_ind][:minutes]}" +
-		"Points: #{cur_player.seasons[s_ind][:points]}"
+		"Games Played: #{cur_player.seasons[s_ind][:games_played]}\n" +
+		"Minutes: #{cur_player.seasons[s_ind][:minutes]}\n" +
+		"Points: #{cur_player.seasons[s_ind][:points]}\n" +
+		"Points Avg: #{cur_player.seasons[s_ind][:avgpoints]}\n" +
+		"FG Pct: #{cur_player.seasons[s_ind][:fieldgoalpct]}\n" +
+		"3 Pt FG Pct: #{cur_player.seasons[s_ind][:fieldgoalpct3p]}\n" +
+		"Assists: #{cur_player.seasons[s_ind][:assists]}\n" +
+		"Turnovers: #{cur_player.seasons[s_ind][:turnovers]}\n" +
+		"Blocks: #{cur_player.seasons[s_ind][:blocks]}\n" +
+		"Steals: #{cur_player.seasons[s_ind][:steals]}\n"
 	end
 
 	def player_bio
