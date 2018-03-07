@@ -20,9 +20,9 @@ class NdMbb::Scraper
 end
 
 
-NdMbb::Scraper.make_players
+# NdMbb::Scraper.make_players
 
-NdMbb::Player.all.each {|p| p.add_attributes}
-NdMbb::Player.all.each {|p| p.pull_stats}
-t = NdMbb::Player.all
-binding.pry
+# NdMbb::Player.all.each {|p| p.add_attributes}
+# NdMbb::Player.all.each {|p| p.pull_stats}
+# t = NdMbb::Player.all
+# binding.pry

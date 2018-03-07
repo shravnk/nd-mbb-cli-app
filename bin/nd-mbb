@@ -1,4 +1,6 @@
 #!/usr/bin/env ruby
 
+require_relative '../lib/nd_mbb/cli'
 
-puts "Test"
+NdMbb::CLI.new.welcome
+
