@@ -59,7 +59,7 @@ class NdMbb::CLI
 			"Blocks: #{cur_player.seasons[s_ind][:blocks]}\n" +
 			"Steals: #{cur_player.seasons[s_ind][:steals]}\n\n"
 		else
-			puts "There are no stats available for this player\n\n"
+			puts "There are no stats available for this player.\n\n"
 		end
 
 		self.player_nav(cur_player)
