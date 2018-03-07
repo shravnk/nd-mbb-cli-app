@@ -11,28 +11,10 @@ class NdMbb::CLI
 		NdMbb::Player.all.each {|p| p.pull_stats}
 
 		puts "Welcome to the home of Notre Dame Men's Basketball!"
-		player_bio
+		get_player
 	end
 
-	def display_stats(cur_player)
-		cur_player.seasons.each_with_index{|seas, i| puts "#{i+1}. #{seas[:year]}"}
-		puts "Enter a number to select a season:"
-		s_ind = gets.strip.to_i - 1
-
-		puts "\n#{cur_player.seasons[s_ind][:year]}\n\n" +
-		"Games Played: #{cur_player.seasons[s_ind][:games_played]}\n" +
-		"Minutes: #{cur_player.seasons[s_ind][:minutes]}\n" +
-		"Points: #{cur_player.seasons[s_ind][:points]}\n" +
-		"Points Avg: #{cur_player.seasons[s_ind][:avgpoints]}\n" +
-		"FG Pct: #{cur_player.seasons[s_ind][:fieldgoalpct]}\n" +
-		"3 Pt FG Pct: #{cur_player.seasons[s_ind][:fieldgoalpct3p]}\n" +
-		"Assists: #{cur_player.seasons[s_ind][:assists]}\n" +
-		"Turnovers: #{cur_player.seasons[s_ind][:turnovers]}\n" +
-		"Blocks: #{cur_player.seasons[s_ind][:blocks]}\n" +
-		"Steals: #{cur_player.seasons[s_ind][:steals]}\n"
-	end
-
-	def player_bio
+	def get_player
 				
 		NdMbb::Player.all.each_with_index do |p,i|
 			puts "#{i+1}. #{p.name}"
@@ -43,6 +25,10 @@ class NdMbb::CLI
 		input = gets.strip.to_i - 1
 
 		cur_player = NdMbb::Player.all[input]
+		self.player_nav(cur_player)
+	end
+
+	def display_bio(cur_player)
 
 		puts "\n#{cur_player.name}\n\n" +
 		"Class: #{cur_player.class}\n" +
@@ -50,24 +36,52 @@ class NdMbb::CLI
 		"High School: #{cur_player.high_school}\n" +
 		"Height: #{cur_player.height}\n" +
 		"Weight: #{cur_player.weight}\n" +
-		"Position: #{cur_player.position}\n\n"
+		"Position: #{cur_player.position}\n"
 
-		puts "Would you like to see this player's stats? (y/n)"
-		ans = gets.strip
+		self.player_nav(cur_player)
+	end
 
-		if ans.upcase == "Y"
-			display_stats(cur_player)
+	def display_stats(cur_player)
+		if !cur_player.seasons.empty?
+			cur_player.seasons.each_with_index{|seas, i| puts "#{i+1}. #{seas[:year]}"}
+			puts "Enter a number to select a season:"
+			s_ind = gets.strip.to_i - 1
+
+			puts "\n#{cur_player.seasons[s_ind][:year]}\n\n" +
+			"Games Played: #{cur_player.seasons[s_ind][:games_played]}\n" +
+			"Minutes: #{cur_player.seasons[s_ind][:minutes]}\n" +
+			"Points: #{cur_player.seasons[s_ind][:points]}\n" +
+			"Points Avg: #{cur_player.seasons[s_ind][:avgpoints]}\n" +
+			"FG Pct: #{cur_player.seasons[s_ind][:fieldgoalpct]}\n" +
+			"3 Pt FG Pct: #{cur_player.seasons[s_ind][:fieldgoalpct3p]}\n" +
+			"Assists: #{cur_player.seasons[s_ind][:assists]}\n" +
+			"Turnovers: #{cur_player.seasons[s_ind][:turnovers]}\n" +
+			"Blocks: #{cur_player.seasons[s_ind][:blocks]}\n" +
+			"Steals: #{cur_player.seasons[s_ind][:steals]}\n\n"
 		else
-			puts "Would you like to see another player?"
-			another = gets.strip
-			if another.upcase == "Y"
-				player_bio
-			else
-				exit
-			end
+			puts "There are no stats available for this player\n\n"
 		end
 
-
-
+		self.player_nav(cur_player)
 	end
+
+	def player_nav(cur_player)
+		puts "\n#{cur_player.name} -- Menu"
+		puts "1. View player bio\n2. View player stats\n3. View Another Player\n4. Main Menu\n5. Exit Application\n\nEnter a number to select an option:"
+		option = gets.strip
+		puts "\n"
+		case option
+		when "1"
+			self.display_bio(cur_player)
+		when "2"
+			self.display_stats(cur_player)
+		when "3"
+			self.get_player
+		when "5"
+			exit
+		else
+			puts "Please select an option 1-4"
+			player_nav(cur_player)
+		end
+	end	
 end
