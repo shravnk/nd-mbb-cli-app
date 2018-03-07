@@ -16,10 +16,18 @@ class NdMbb::CLI
 
 	def player_bio
 		puts "Enter a number to learn more about a player"
-		i = 1
-		NdMbb::Player.all.each do |p|
-			puts "#{i}. #{p.name}"
-			i += 1
+		
+		NdMbb::Player.all.each_with_index do |p,i|
+			puts "#{i+1}. #{p.name}"
 		end
+
+		input = gets.strip.to_i - 1
+
+		cur_player = NdMbb::Player.all[input]
+
+		puts cur_player.name
+		puts cur_player.height
+		puts cur_player.weight
+
 	end
 end
