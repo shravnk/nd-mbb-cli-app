@@ -111,18 +111,57 @@ class NdMbb::CLI
 	end	
 
 	def team_totals
-		puts "\nNotre Dame Men's Basketball - 2017-2018 TEAM TOTALS\n"
-
-		puts "Points: #{@cur_team.points}"
-		# \nAssists: #{cur_team.assists}\nTurnovers: #{cur_team.turnovers}\nBlocks: #{cur_team.blocks}\nSteals: #{cur_team.steals}\n"
+		puts "\nNotre Dame Men's Basketball -- 2017-2018 -- Team Totals\n"
+		c = @cur_team
+		puts "Points: #{c.points}\nAssists: #{c.assists}\nTurnovers: #{c.turnovers}\nBlocks: #{c.blocks}\nSteals: #{c.steals}\n"
 
 		self.team_nav
 		
 	end
 
-	def team_leaders
-
+	def leader_nav
+		puts "\nNotre Dame Men's Basketball -- 2017-18 -- Team Leaders\n"
+		puts "1. Points\n2. Assists\n3. Turnovers\n4. Steals\n5. Blocks\n\nEnter a number to select an option:"
+		option = gets.strip
+		puts "\n"
+		case option
+		when "1"
+			self.display_leaders("Points")
+		when "2"
+			self.display_leaders("Assists")
+		when "3"
+			self.display_leaders("Turnovers")
+		when "4"
+			self.display_leaders("Steals")
+		when "5"
+			self.display_leaders("Blocks")
+		else
+			puts "Please select an option 1-5"
+			leader_nav
+		end
 	end
+
+	def display_leaders(cat)
+		puts "\nNotre Dame Men's Basketball -- 2017-18 -- #{cat} Leaders\n"
+		c = @cur_team
+		case cat
+		when "Points"
+			c.points_leaders.each_with_index{|player, i| puts "#{i+1}. #{player[:name]}:  #{player[:points]}"}
+		when "Assists"
+			c.assists_leaders.each_with_index{|player, i| puts "#{i+1}. #{player[:name]}:  #{player[:assists]}"}
+		when "Turnovers"
+			c.turnovers_leaders.each_with_index{|player, i| puts "#{i+1}. #{player[:name]}:  #{player[:turnovers]}"}
+		when "Steals"
+			c.steals_leaders.each_with_index{|player, i| puts "#{i+1}. #{player[:name]}:  #{player[:steals]}"}
+		when "Blocks"
+			c.blocks_leaders.each_with_index{|player, i| puts "#{i+1}. #{player[:name]}:  #{player[:blocks]}"}
+		else
+			puts "Please select an option 1-5"
+			display_leaders(cat)
+		end
+		team_nav
+	end
+
 
 	def team_nav
 		puts "\nNotre Dame Men's Basketball - 2017-18 -- Menu"
@@ -133,7 +172,7 @@ class NdMbb::CLI
 		when "1"
 			self.team_totals
 		when "2"
-			self.team_leaders
+			self.leader_nav
 		when "3"
 			self.main_menu
 		when "4"
