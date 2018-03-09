@@ -8,12 +8,14 @@ require 'open-uri'
 
 class NdMbb::Team
 
-	attr_accessor :points, :steals, :blocks
+	attr_accessor :points, :steals, :blocks, :assists
 
 	def initialize
 		@points = 0
 		@steals = 0
 		@blocks = 0
+		@assists = 0
+		@turnovers = 0
 	end
 
 	def this_season(seasons)
@@ -28,6 +30,8 @@ class NdMbb::Team
 				@points += player_season[0][:points].to_i
 				@steals += player_season[0][:steals].to_i
 				@blocks += player_season[0][:blocks].to_i
+				@assists += player_season[0][:assists].to_i
+				@turnovers += player_season[0][:turnovers].to_i
 				# binding.pry
 			end
 		end
