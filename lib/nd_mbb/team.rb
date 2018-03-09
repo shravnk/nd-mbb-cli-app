@@ -32,7 +32,7 @@ class NdMbb::Team
 
 				leaders[i] = Hash.new
 
-				leaders[i][:name]
+				leaders[i][:name] = player_season[0][:name]
 				leaders[i][:points] = player_season[0][:points].to_i
 				leaders[i][:assists] = player_season[0][:assists].to_i
 				leaders[i][:turnovers] = player_season[0][:turnovers].to_i
@@ -48,26 +48,35 @@ class NdMbb::Team
 		NdMbb::Player.all.each do |player|
 			if !this_season(player.seasons).empty?
 				player_season = self.this_season(player.seasons)
-				
-				l_points += player_season[0][:points].to_i
-				l_steals += player_season[0][:steals].to_i
-				l_blocks += player_season[0][:blocks].to_i
-				l_assists += player_season[0][:assists].to_i
-				l_turnovers += player_season[0][:turnovers].to_i
+
+				self.points += player_season[0][:points].to_i
+				self.steals += player_season[0][:steals].to_i
+				self.blocks += player_season[0][:blocks].to_i
+				self.assists += player_season[0][:assists].to_i
+				self.turnovers += player_season[0][:turnovers].to_i
 				# binding.pry
 			end
 		end
 	end
 
-	def pts_leaders #display top 5 pts leaders
-
+	def points_leaders #display top 5 pts leaders
+		leaders.sort_by{|player| player[:points]}.reverse[0..4]
 	end
 
-	def assts_leaders
+	def assists_leaders
+		leaders.sort_by{|player| player[:assists]}.reverse[0..4]
 	end
 
 	def steals_leaders
+		leaders.sort_by{|player| player[:steals]}.reverse[0..4]
 	end
 
+	def blocks_leaders
+		leaders.sort_by{|player| player[:blocks]}.reverse[0..4]
+	end
+
+	def turnovers_leaders
+		leaders.sort_by{|player| player[:turnovers]}.reverse[0..4]
+	end
 
 end
