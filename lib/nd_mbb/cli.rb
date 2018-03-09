@@ -77,6 +77,7 @@ class NdMbb::CLI
 			"Points Avg: #{cur_player.seasons[s_ind][:avgpoints]}\n" +
 			"FG Pct: #{cur_player.seasons[s_ind][:fieldgoalpct]}\n" +
 			"3 Pt FG Pct: #{cur_player.seasons[s_ind][:fieldgoalpct3p]}\n" +
+			"Rebounds: #{cur_player.seasons[s_ind][:rebounds]}\n" +
 			"Assists: #{cur_player.seasons[s_ind][:assists]}\n" +
 			"Turnovers: #{cur_player.seasons[s_ind][:turnovers]}\n" +
 			"Blocks: #{cur_player.seasons[s_ind][:blocks]}\n" +
@@ -113,7 +114,7 @@ class NdMbb::CLI
 	def team_totals
 		puts "\nNotre Dame Men's Basketball -- 2017-2018 -- Team Totals\n"
 		c = @cur_team
-		puts "Points: #{c.points}\nAssists: #{c.assists}\nTurnovers: #{c.turnovers}\nBlocks: #{c.blocks}\nSteals: #{c.steals}\n"
+		puts "Points: #{c.points}\nAssists: #{c.assists}\nRebounds: #{c.rebounds}\nTurnovers: #{c.turnovers}\nBlocks: #{c.blocks}\nSteals: #{c.steals}\n"
 
 		self.team_nav
 		
@@ -121,7 +122,7 @@ class NdMbb::CLI
 
 	def leader_nav
 		puts "\nNotre Dame Men's Basketball -- 2017-18 -- Team Leaders\n"
-		puts "1. Points\n2. Assists\n3. Turnovers\n4. Steals\n5. Blocks\n\nEnter a number to select an option:"
+		puts "1. Points\n2. Assists\n3. Rebounds\n4. Turnovers\n5. Steals\n6. Blocks\n\nEnter a number to select an option:"
 		option = gets.strip
 		puts "\n"
 		case option
@@ -130,13 +131,15 @@ class NdMbb::CLI
 		when "2"
 			self.display_leaders("Assists")
 		when "3"
-			self.display_leaders("Turnovers")
+			self.display_leaders("Rebounds")
 		when "4"
-			self.display_leaders("Steals")
+			self.display_leaders("Turnovers")
 		when "5"
+			self.display_leaders("Steals")
+		when "6"
 			self.display_leaders("Blocks")
 		else
-			puts "Please select an option 1-5"
+			puts "Please select an option 1-6"
 			leader_nav
 		end
 	end
@@ -155,8 +158,10 @@ class NdMbb::CLI
 			c.steals_leaders.each_with_index{|player, i| puts "#{i+1}. #{player[:name]}:  #{player[:steals]}"}
 		when "Blocks"
 			c.blocks_leaders.each_with_index{|player, i| puts "#{i+1}. #{player[:name]}:  #{player[:blocks]}"}
+		when "Rebounds"
+			c.rebounds_leaders.each_with_index{|player, i| puts "#{i+1}. #{player[:name]}:  #{player[:rebounds]}"}
 		else
-			puts "Please select an option 1-5"
+			puts "Please select an option 1-6"
 			display_leaders(cat)
 		end
 		team_nav
@@ -164,7 +169,7 @@ class NdMbb::CLI
 
 
 	def team_nav
-		puts "\nNotre Dame Men's Basketball - 2017-18 -- Menu"
+		puts "\nNotre Dame Men's Basketball -- 2017-18 -- Menu"
 		puts "1. Team Totals\n2. Team Leaders\n3. Main Menu\n4. Exit Application\n\nEnter a number to select an option:"
 		option = gets.strip
 		puts "\n"

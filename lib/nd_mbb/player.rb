@@ -63,6 +63,7 @@ class NdMbb::Player
         seasons[i][:turnovers] = season.attribute('to').value
         seasons[i][:blocks] = season.attribute('blk').value
         seasons[i][:steals] = season.attribute('stl').value
+        seasons[i][:rebounds] = season.attribute('treb').value
 
         seasons[i][:name] = self.name
         

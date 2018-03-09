@@ -8,12 +8,13 @@ require 'open-uri'
 
 class NdMbb::Team
 
-	attr_accessor :points, :steals, :blocks, :assists, :turnovers
+	attr_accessor :points, :steals, :blocks, :assists, :turnovers, :rebounds
 	attr_accessor :leaders
 
 	def initialize
 		@points = 0
 		@steals = 0
+		@rebounds = 0
 		@blocks = 0
 		@assists = 0
 		@turnovers = 0
@@ -40,6 +41,7 @@ class NdMbb::Team
 				leaders[i][:turnovers] = player_season[0][:turnovers].to_i
 				leaders[i][:steals] = player_season[0][:steals].to_i
 				leaders[i][:blocks] = player_season[0][:blocks].to_i
+				leaders[i][:rebounds] = player_season[0][:rebounds].to_i
 
 				i += 1
 			end
@@ -56,6 +58,7 @@ class NdMbb::Team
 				self.blocks += player_season[0][:blocks].to_i
 				self.assists += player_season[0][:assists].to_i
 				self.turnovers += player_season[0][:turnovers].to_i
+				self.rebounds += player_season[0][:rebounds].to_i
 				# binding.pry
 			end
 		end
@@ -79,6 +82,10 @@ class NdMbb::Team
 
 	def turnovers_leaders
 		leaders.sort_by{|player| player[:turnovers]}.reverse[0..4]
+	end
+
+	def rebounds_leaders
+		leaders.sort_by{|player| player[:rebounds]}.reverse[0..4]
 	end
 
 end
