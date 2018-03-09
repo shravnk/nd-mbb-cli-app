@@ -15,9 +15,6 @@ NdMbb::Player.all.each {|p| p.pull_stats}
 cur_team = NdMbb::Team.new
 
 
-cur_team.agg_stats
-cur_team.leader_stats
-
 t = cur_team.points
 a = cur_team.leaders[1]
 b = cur_team.points_leaders

@@ -5,14 +5,36 @@ require_relative '../nd_mbb/scraper'
 require_relative '../nd_mbb/team'
 
 class NdMbb::CLI
+
+	attr_accessor :cur_team
+
 	def welcome
 		NdMbb::Scraper.make_players
 
-		NdMbb::Player.all.each {|p| p.add_attributes}
-		NdMbb::Player.all.each {|p| p.pull_stats}
+		# NdMbb::Player.all.each {|p| p.add_attributes}
+		# NdMbb::Player.all.each {|p| p.pull_stats}
 
-		puts "Welcome to the home of Notre Dame Men's Basketball!"
-		get_player
+		@cur_team = NdMbb::Team.new
+
+		main_menu
+	end
+
+	def main_menu
+		puts "\nNotre Dame Men's Basketball -- Main Menu\n"
+		puts "1. Team Information\n2. Player Information\n3. Exit Application\n\nEnter a number to select an option:"
+		option = gets.strip
+		puts "\n"
+		case option
+		when "1"
+			self.team_nav
+		when "2"
+			self.get_player
+		when "3"
+			exit
+		else
+			puts "Please select an option 1-3"
+			main_menu
+		end
 	end
 
 	def get_player
@@ -78,11 +100,49 @@ class NdMbb::CLI
 			self.display_stats(cur_player)
 		when "3"
 			self.get_player
+		when "4"
+			self.main_menu
 		when "5"
 			exit
 		else
-			puts "Please select an option 1-4"
+			puts "Please select an option 1-5"
 			player_nav(cur_player)
 		end
 	end	
+
+	def team_totals
+		puts "\nNotre Dame Men's Basketball - 2017-2018 TEAM TOTALS\n"
+
+		puts "Points: #{@cur_team.points}"
+		# \nAssists: #{cur_team.assists}\nTurnovers: #{cur_team.turnovers}\nBlocks: #{cur_team.blocks}\nSteals: #{cur_team.steals}\n"
+
+		self.team_nav
+		
+	end
+
+	def team_leaders
+
+	end
+
+	def team_nav
+		puts "\nNotre Dame Men's Basketball - 2017-18 -- Menu"
+		puts "1. Team Totals\n2. Team Leaders\n3. Main Menu\n4. Exit Application\n\nEnter a number to select an option:"
+		option = gets.strip
+		puts "\n"
+		case option
+		when "1"
+			self.team_totals
+		when "2"
+			self.team_leaders
+		when "3"
+			self.main_menu
+		when "4"
+			exit
+		else
+			puts "Please select an option 1-4"
+			team_nav
+		end
+	end
+
+
 end

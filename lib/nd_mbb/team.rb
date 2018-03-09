@@ -18,6 +18,8 @@ class NdMbb::Team
 		@assists = 0
 		@turnovers = 0
 		@leaders = []
+		self.leader_stats
+		self.agg_stats
 	end
 
 	def this_season(seasons)

@@ -17,6 +17,8 @@ class NdMbb::Player
     @link = player_hash[:link]
     @@all << self
     @seasons = []
+    self.add_attributes
+    self.pull_stats
   end
 
   def self.all
