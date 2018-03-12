@@ -1,7 +1,3 @@
-require_relative '../../config/environment'
-require_relative '../nd_mbb'
-require_relative '../nd_mbb/player'
-
 class NdMbb::Scraper
 
   def self.get_page

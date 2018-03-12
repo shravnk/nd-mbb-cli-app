@@ -1,9 +1,3 @@
-require_relative '../../config/environment'
-require_relative '../nd_mbb'
-require_relative '../nd_mbb/player'
-require_relative '../nd_mbb/scraper'
-require_relative '../nd_mbb/team'
-
 class NdMbb::CLI
 
 	attr_accessor :cur_team

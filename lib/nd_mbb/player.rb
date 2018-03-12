@@ -1,11 +1,3 @@
-require_relative '../../config/environment'
-require_relative '../nd_mbb'
-require_relative '../nd_mbb/scraper'
-require_relative '../nd_mbb/team'
-require 'pry'
-require 'nokogiri'
-require 'open-uri'
-
 class NdMbb::Player
   @@all = []
 

@@ -1,7 +1,9 @@
-
-
 module NdMbb
-  # Your code goes here...
-end
+	require 'nokogiri'
+	require 'open-uri'
 
-require_relative '../config/environment'
+	require_relative 'nd_mbb/cli'
+	require_relative 'nd_mbb/scraper'
+	require_relative 'nd_mbb/team'
+	require_relative 'nd_mbb/player'
+end
