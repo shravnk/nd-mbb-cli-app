@@ -48,7 +48,11 @@ class NdMbb::CLI
 		input = gets.strip.to_i - 1
 
 		cur_player = NdMbb::Player.all[input]
-		self.player_nav(cur_player)
+		if input.between?(0,NdMbb::Player.all.length - 1)
+			self.player_nav(cur_player)
+		else
+			get_player
+		end
 	end
 
 	def display_bio(cur_player)

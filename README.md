@@ -22,7 +22,24 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+PURPOSE
+
+This gem helps you to learn about the current Notre Dame Men's Basketball Team.
+
+MAIN MENU
+
+Choose to view information about individual players or about the overall team. Enter a number and press enter.
+
+TEAM INFORMATION
+
+Select an option to view the team's overall stats, or view individual leaders in several stat categories.
+
+PLAYER INFORMATION
+
+First select a player. Then choose to view a brief player bio or the player's career statistics.
+
+You'll then see the player menu. Select an option to navigate to another player, or return to the main menu.
+
 
 ## Development
 
