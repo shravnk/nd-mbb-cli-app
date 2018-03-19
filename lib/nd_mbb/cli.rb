@@ -144,24 +144,7 @@ class NdMbb::CLI
 
 	def display_leaders(cat)
 		puts "\nNotre Dame Men's Basketball -- 2017-18 -- #{cat} Leaders\n"
-		c = @cur_team
-		case cat
-		when "Points"
-			c.points_leaders.each_with_index{|player, i| puts "#{i+1}. #{player[:name]}:  #{player[:points]}"}
-		when "Assists"
-			c.assists_leaders.each_with_index{|player, i| puts "#{i+1}. #{player[:name]}:  #{player[:assists]}"}
-		when "Turnovers"
-			c.turnovers_leaders.each_with_index{|player, i| puts "#{i+1}. #{player[:name]}:  #{player[:turnovers]}"}
-		when "Steals"
-			c.steals_leaders.each_with_index{|player, i| puts "#{i+1}. #{player[:name]}:  #{player[:steals]}"}
-		when "Blocks"
-			c.blocks_leaders.each_with_index{|player, i| puts "#{i+1}. #{player[:name]}:  #{player[:blocks]}"}
-		when "Rebounds"
-			c.rebounds_leaders.each_with_index{|player, i| puts "#{i+1}. #{player[:name]}:  #{player[:rebounds]}"}
-		else
-			puts "Please select an option 1-6"
-			display_leaders(cat)
-		end
+		@cur_team.sort_leaders(cat).each_with_index{|player, i| puts "#{i+1}. #{player[:name]}:  #{player[cat.downcase.to_sym]}"}	
 		team_nav
 	end
 

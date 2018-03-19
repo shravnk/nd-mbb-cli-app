@@ -5,7 +5,6 @@ class NdMbb::Scraper
   end
 
   def self.make_players
-    player_array = []
     get_page.css("table#sortable_roster tr a").each do |player|
       p_name = player.text
       p_link = player['href']

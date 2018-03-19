@@ -56,28 +56,8 @@ class NdMbb::Team
 		end
 	end
 
-	def points_leaders #display top 5 pts leaders
-		leaders.sort_by{|player| player[:points]}.reverse[0..4]
-	end
-
-	def assists_leaders
-		leaders.sort_by{|player| player[:assists]}.reverse[0..4]
-	end
-
-	def steals_leaders
-		leaders.sort_by{|player| player[:steals]}.reverse[0..4]
-	end
-
-	def blocks_leaders
-		leaders.sort_by{|player| player[:blocks]}.reverse[0..4]
-	end
-
-	def turnovers_leaders
-		leaders.sort_by{|player| player[:turnovers]}.reverse[0..4]
-	end
-
-	def rebounds_leaders
-		leaders.sort_by{|player| player[:rebounds]}.reverse[0..4]
+	def sort_leaders(category)
+		leaders.sort_by{|player| player[category.downcase.to_sym]}.reverse[0..4]
 	end
 
 end
